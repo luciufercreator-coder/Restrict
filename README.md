@@ -74,6 +74,24 @@ We have all seen horrendous filenames like: `@RubbishChannel_The_Dark_Knight_200
 <br>
 
 ---
+<br>
+
+## 🔗 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 8: 𝓣𝓱𝓮 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓮𝓻'𝓼 𝓣𝓸𝓸𝓵𝓴𝓲𝓽 (Useful Links & References) 🧰
+
+To ensure you possess absolutely everything required to run this masterpiece efficiently, here is a curated list of all essential platforms, documentation, and tools. Bookmark these; they are your absolute best friends!
+
+*   🐙 **GitHub (Version Control):** [github.com](https://github.com/) - *Host your glorious code here before deploying it to the cloud.*
+*   ✈️ **Telegram API (Core Engine):** [my.telegram.org](https://my.telegram.org/) - *The portal to generate your vital API_ID and API_HASH.*
+*   🤖 **BotFather (Bot Creation):** [@BotFather](https://t.me/BotFather) - *The official Telegram bot required to forge your BOT_TOKEN.*
+*   🍃 **MongoDB (The Cloud Brain):** [mongodb.com](https://www.mongodb.com/) - *Set up your free M0 Cluster database here to power the bot's memory.*
+*   ☁️ **Render (Hosting Platform):** [render.com](https://render.com/) - *Deploy your bot here for incredibly smooth, continuous operation.*
+*   ☁️ **Koyeb (Alternative Hosting):** [koyeb.com](https://www.koyeb.com/) - *A brilliant, high-performance alternative hosting solution to Render.*
+*   ⏱️ **UptimeRobot (Keep-Alive Monitor):** [uptimerobot.com](https://uptimerobot.com/) - *The bot has a built-in health-check server. Use UptimeRobot to ping it every 5 minutes and ensure it never falls asleep!*
+*   📚 **Pyrogram Framework (Documentation):** [docs.pyrogram.org](https://docs.pyrogram.org/) - *The magnificent Python framework operating under the bonnet of this entire project.*
+
+<br>
+
+---
 
 <br>
 
@@ -240,25 +258,6 @@ Even the most advanced systems occasionally face hiccups. If something appears t
 *   **❓ Question:** The bot is throwing an `AuthKeyUnregistered` or `Session Expired` error. How do I fix it?
     *   **💡 Answer:** This indicates that Telegram has forcefully terminated the Userbot session, or you manually logged the bot out via your active sessions menu. 
     *   *The Fix:* Simply type `/logout` to clear the old corrupted data, and then execute `/login` to generate a fresh, secure session. Done! ✅
-
-<br>
-
----
-
-<br>
-
-## 🔗 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 8: 𝓣𝓱𝓮 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓮𝓻'𝓼 𝓣𝓸𝓸𝓵𝓴𝓲𝓽 (Useful Links & References) 🧰
-
-To ensure you possess absolutely everything required to run this masterpiece efficiently, here is a curated list of all essential platforms, documentation, and tools. Bookmark these; they are your absolute best friends!
-
-*   🐙 **GitHub (Version Control):** [github.com](https://github.com/) - *Host your glorious code here before deploying it to the cloud.*
-*   ✈️ **Telegram API (Core Engine):** [my.telegram.org](https://my.telegram.org/) - *The portal to generate your vital API_ID and API_HASH.*
-*   🤖 **BotFather (Bot Creation):** [@BotFather](https://t.me/BotFather) - *The official Telegram bot required to forge your BOT_TOKEN.*
-*   🍃 **MongoDB (The Cloud Brain):** [mongodb.com](https://www.mongodb.com/) - *Set up your free M0 Cluster database here to power the bot's memory.*
-*   ☁️ **Render (Hosting Platform):** [render.com](https://render.com/) - *Deploy your bot here for incredibly smooth, continuous operation.*
-*   ☁️ **Koyeb (Alternative Hosting):** [koyeb.com](https://www.koyeb.com/) - *A brilliant, high-performance alternative hosting solution to Render.*
-*   ⏱️ **UptimeRobot (Keep-Alive Monitor):** [uptimerobot.com](https://uptimerobot.com/) - *The bot has a built-in health-check server. Use UptimeRobot to ping it every 5 minutes and ensure it never falls asleep!*
-*   📚 **Pyrogram Framework (Documentation):** [docs.pyrogram.org](https://docs.pyrogram.org/) - *The magnificent Python framework operating under the bonnet of this entire project.*
 
 <br>
 
