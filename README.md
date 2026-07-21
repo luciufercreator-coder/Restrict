@@ -125,3 +125,79 @@ Aapko wahan yeh saari details bharni hain ekdum sahi-sahi!
 <br>
 
 ---
+
+## 🪄 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 5: 𝓣𝓱𝓮 𝓜𝓪𝓰𝓲𝓬 𝓢𝓹𝓮𝓵𝓵𝓼 (Bot Commands In Detail) 📜
+
+Is jaadui robot ko control karne ke liye aapko kuch "Mantras" (Commands) bolne padenge. Har mantra ka apna ek alag jaadoo hai. Aaiye inko detail me samajhte hain:
+
+### 👑 𝕿𝖍𝖊 𝕸𝖆𝖘𝖙𝖊𝖗 𝕶𝖊𝖞𝖘 (Admin Commands)
+Yeh commands sirf aap (Admin) use kar sakte ho. Kisi aur ne koshish ki toh bot usko ignore kar dega!
+
+*   🔑 **`/login` (Apna Identity Card Dikhayein)**
+    *   **Yeh kya karta hai?** Telegram private channels ko lock karke rakhta hai. Is command se aap bot ko apna account use karne ki permission dete ho taaki woh un locks ko khol sake.
+    *   **Kaise Use Karein?**
+        1. Type karo `/login` aur send karo.
+        2. Bot aapse API_ID aur HASH mangega (Agar aapne Environment Variables me daala hai, toh yeh step automatically skip ho jayega!).
+        3. Phir bot puchega aapka Phone Number. Usme country code lagakar bhejo (Jaise: `+919876543210`).
+        4. Telegram aapko ek 5-digit ka OTP bhejega.
+        5. **⚠️ SABSE ZAROORI BAAT:** OTP ko spaces ke sath bhejna hai. Agar OTP `12345` hai, toh aapko `1 2 3 4 5` likh kar bhejna hai. (Bina space ke bhejoge toh Telegram usko block kar dega).
+        6. Agar aapke account par 2-Step Password laga hai, toh bot woh bhi mangega. Bas apna password daal do aur **BINGO!** Aap login ho gaye! 🎉
+
+*   🚪 **`/logout` (Khuda Hafiz!)**
+    *   **Yeh kya karta hai?** Agar aap chahte ho ki bot ab aapke account se koi file na nikale, ya aapko doosra account lagana hai, toh yeh daba do. Bot aapki saari login details ko apne dimaag se permanently delete kar dega. Ekdum Safe! 🛡️
+
+*   📊 **`/status` (Robot Ka Health Checkup)**
+    *   **Yeh kya karta hai?** Robot theek se chal raha hai ya bimar (slow) ho gaya hai? Yeh command dabate hi bot aapko batayega:
+        *   *RAM:* Uske pet me kitni jagah bachi hai?
+        *   *CPU:* Uska dimaag kitna garam hai?
+        *   *Uptime:* Woh kitne dino/ghanto se bina soye kaam kar raha hai?
+        *   *Active Tasks:* Abhi is waqt kitni downloading chal rahi hai?
+
+*   📈 **`/botstats` (Robot Ki Report Card)**
+    *   **Yeh kya karta hai?** Agar aapne apne dosto ko bhi bot use karne diya hai, toh yeh command aapko poori list dikhayega ki kaunsa user is waqt kya copy kar raha hai aur kitna time bacha hai (ETA). Aap sab par nazar rakh sakte ho! 👀
+
+<br>
+
+### 📥 𝕿𝖍𝖊 𝕿𝖗𝖆𝖓𝖘𝖕𝖔𝖗𝖙𝖊𝖗𝖘 (Processing Commands)
+Yeh commands asal me aapke khazane (files) ko ek jagah se doosri jagah le jaane ka kaam karte hain.
+
+*   🚀 **`/dl` (Ya kisi file ke link par chota sa Reply dena)**
+    *   **Yeh kya karta hai?** Yeh aapka sabse main hathiyar hai! Isko aap do tarike se use kar sakte ho:
+        *   **Single File:** Kisi bhi restricted file ka link copy karo aur bot ko paste kar do (ya link par reply me `/dl` likho). Bot turant usko clean karke aapko de dega.
+        *   **Batch Files (Maha-Jaadoo ✨):** Agar aapko 1 se lekar 500 tak saari movies chahiye! Toh bas link ko is style me bhejo:
+            👉 `https://t.me/c/12345678/101 - 500`
+        *   Bot aapse puchega: "Kahan bhejna hai?" (DM me ya kisi Channel me). Aap chun lo aur phir bot ek-ek karke 400 files uthayega, unhe saaf karega, aur aapke naye channel me jama kar dega! Aaram se baith kar chai piyo! ☕
+
+*   🛑 **`/cancel` (Rok Do Bhai!)**
+    *   **Yeh kya karta hai?** Maan lo aapne galti se 1000 files lagadi, aur aapko yaad aaya "Arre yaar, galat link de diya!" Toh ghabrane ki zaroorat nahi. Bas `/cancel` type karo. Ek sundar sa menu khulega jisme aapki saari downloading list hogi. Jo rokna hai uspe click karo, aur robot wahi break laga dega! 🛑
+
+<br>
+
+### 🦉 𝕿𝖍𝖊 𝕾𝖎𝖑𝖊𝖓𝖙 𝕲𝖚𝖆𝖗𝖉𝖎𝖆𝖓𝖘 (Live Watcher Commands)
+Yeh commands tab kaam aate hain jab aapko mehanat karni hi nahi hai! Aap so jao, bot 24 ghante jaagta rahega!
+
+*   👀 **`/watch [Link]` (CCTV Camera Laga Do)**
+    *   **Yeh kya karta hai?** Bot ko kisi source channel ka link do. Bot wahan baith jayega. Ab jaise hi wahan koi admin nayi series ka episode daalega, bot 1 second me usko pakdega, uska kachra naam hatayega, aur aapke channel par bhej dega!
+    *   *Setup me yeh aapse 3 cheezein puchega:*
+        1. Kahan bhejna hai? (Target Channel ID)
+        2. Forwarding Speed kitni rakhni hai? (3 Seconds best hai!)
+        3. Filter kya lagana hai? (Sirf Video chahiye, ya Text/Photo bhi chahiye?)
+
+*   📋 **`/watchers` (Ya `/list` - Apni List Dekho)**
+    *   **Yeh kya karta hai?** Agar bhool gaye ho ki bot kahan-kahan jaasoosi kar raha hai, toh yeh command aapko ek neat list dikha dega aapke saare active CCTV cameras ki! 📷
+
+*   🗑️ **`/unwatch [Source_ID]` (Camera Hatao)**
+    *   **Yeh kya karta hai?** Agar aap chahte ho ki bot ab us channel se file chori karna band kar de, toh `/watchers` list se us channel ka ID dekho aur `/unwatch -100XXXXX` type kar do. Jaasoosi band!
+
+*   🎯 **`/removetarget` (Raasta Badlo)**
+    *   **Yeh kya karta hai?** Agar aapne ek source ko 3 target channels me set kiya tha, aur ab 1 target hatana hai, toh `/removetarget [Source_ID] [Dest_ID]` type karke rasta band kar sakte ho!
+
+<br>
+
+---
+
+<br>
+
+## 🏰 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 6: 𝓣𝓱𝓮 𝓒𝓵𝓸𝓷𝓮 𝓐𝓻𝓶𝔂 (Deployment Strategy) 🤖🤖🤖
+
+
