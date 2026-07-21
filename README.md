@@ -76,7 +76,7 @@ We have all seen horrendous filenames like: `@RubbishChannel_The_Dark_Knight_200
 ---
 <br>
 
-## 🔗 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 8: 𝓣𝓱𝓮 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓮𝓻'𝓼 𝓣𝓸𝓸𝓵𝓴𝓲𝓽 (Useful Links & References) 🧰
+## 🔗 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 3: 𝓣𝓱𝓮 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓮𝓻'𝓼 𝓣𝓸𝓸𝓵𝓴𝓲𝓽 (Useful Links & References) 🧰
 
 To ensure you possess absolutely everything required to run this masterpiece efficiently, here is a curated list of all essential platforms, documentation, and tools. Bookmark these; they are your absolute best friends!
 
@@ -95,7 +95,7 @@ To ensure you possess absolutely everything required to run this masterpiece eff
 
 <br>
 
-## 🎒 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 3: 𝓖𝓪𝓽𝓱𝓮𝓻𝓲𝓷𝓰 𝓣𝓱𝓮 𝓘𝓷𝓯𝓲𝓷𝓲𝓽𝔂 𝓢𝓽𝓸𝓷𝓮𝓼 (Prerequisites) 💎
+## 🎒 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 4: 𝓖𝓪𝓽𝓱𝓮𝓻𝓲𝓷𝓰 𝓣𝓱𝓮 𝓘𝓷𝓯𝓲𝓷𝓲𝓽𝔂 𝓢𝓽𝓸𝓷𝓮𝓼 (Prerequisites) 💎
 
 Before we can awaken the bot, you need to collect three essential digital keys. Do not worry; this is incredibly straightforward. Just follow these steps:
 
@@ -129,7 +129,7 @@ Before we can awaken the bot, you need to collect three essential digital keys. 
 
 <br>
 
-## ⚙️ 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 4: 𝓣𝓱𝓮 𝓜𝓪𝓼𝓽𝓮𝓻 𝓒𝓸𝓷𝓽𝓻𝓸𝓵 𝓟𝓪𝓷𝓮𝓵 (Environment Variables) 🎛️
+## ⚙️ 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 5: 𝓣𝓱𝓮 𝓜𝓪𝓼𝓽𝓮𝓻 𝓒𝓸𝓷𝓽𝓻𝓸𝓵 𝓟𝓪𝓷𝓮𝓵 (Environment Variables) 🎛️
 
 When you deploy this bot on a cloud service like Render, Koyeb, Heroku, or a VPS, you will be asked to fill in "Environment Variables". Think of this as the bot's settings menu. You must fill these out accurately!
 
@@ -149,7 +149,7 @@ When you deploy this bot on a cloud service like Render, Koyeb, Heroku, or a VPS
 
 <br>
 
-## 🪄 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 5: 𝓣𝓱𝓮 𝓜𝓪𝓰𝓲𝓬 𝓢𝓹𝓮𝓵𝓵𝓼 (Bot Commands In Detail) 📜
+## 🪄 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 6: 𝓣𝓱𝓮 𝓜𝓪𝓰𝓲𝓬 𝓢𝓹𝓮𝓵𝓵𝓼 (Bot Commands In Detail) 📜
 
 To command this robotic marvel, you must utilise specific instructions. Each command triggers a unique function within the ecosystem. 
 
@@ -220,7 +220,7 @@ These commands allow for total automation. Set them up once, and the bot will wo
 
 <br>
 
-## 🏗️ 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 6: 𝓣𝓱𝓮 𝓒𝓵𝓸𝓷𝓮 𝓐𝓻𝓶𝔂 (Deployment Strategy) 🤖🤖🤖
+## 🏗️ 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 7: 𝓣𝓱𝓮 𝓒𝓵𝓸𝓷𝓮 𝓐𝓻𝓶𝔂 (Deployment Strategy) 🤖🤖🤖
 
 Telegram enforces strict rate limits. A solitary account simply cannot transfer immense datasets in a single day. 
 **The Solution?** We construct an Army of Bots! ⚔️
@@ -242,7 +242,7 @@ Telegram enforces strict rate limits. A solitary account simply cannot transfer 
 
 <br>
 
-## 🚑 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 7: 𝓣𝓱𝓮 𝓔𝓶𝓮𝓻𝓰𝓮𝓷𝓬𝔂 𝓚𝓲𝓽 (Troubleshooting & FAQs) 🛠️
+## 🚑 𝓒𝓱𝓪𝓹𝓽𝓮𝓻 8: 𝓣𝓱𝓮 𝓔𝓶𝓮𝓻𝓰𝓮𝓷𝓬𝔂 𝓚𝓲𝓽 (Troubleshooting & FAQs) 🛠️
 
 Even the most advanced systems occasionally face hiccups. If something appears to go awry, consult this manual before panicking:
 
