@@ -57,11 +57,10 @@ DB_NAME = os.environ.get("DB_NAME", "")
 STRING_SESSION = os.environ.get("STRING_SESSION", None)
 
 # Error Log Channel (Optional)
-# Usage: "-100xxxx" for channel, or "-100xxxx/5" for Group Topic
 LOG_CHANNEL = os.environ.get("LOG_CHANNEL", "") 
 
 # Queue System
-TASK_QUEUE = defaultdict(list) # Stores pending tasks: user_id -> [task_data, ...]
+TASK_QUEUE = defaultdict(list) 
 
 # Create a thread pool for blocking tasks
 io_executor = ThreadPoolExecutor(max_workers=4)
@@ -181,7 +180,7 @@ class Database:
         count = await self.col.count_documents({"session": {"$ne": None}})
         return count
 
-    # --- NEW SMART RESUME PROGRESS METHODS ---
+    # --- SMART RESUME PROGRESS METHODS ---
     async def save_sync_progress(self, user_id, source_id, dest_id, msg_id):
         query = {"user_id": int(user_id), "source_id": str(source_id), "dest_id": str(dest_id)}
         await self.db.sync_progress.update_one(
@@ -197,7 +196,7 @@ class Database:
     # --- WATCHER METHODS ---
     async def add_watcher(self, user_id, source_id, dest_id, source_thread=None, dest_thread=None, delay=0, is_restricted=False, source_title=None, dest_title=None, allowed_types=None):
         if allowed_types is None:
-            allowed_types = ["Video", "Document"] # Default strict filter
+            allowed_types = ["Video", "Document"] 
 
         query = {
             'source_id': int(source_id),
@@ -213,7 +212,6 @@ class Database:
         existing = await self.db.watchers.find_one(query)
         if existing:
             targets = existing.get("targets", [])
-            # Convert legacy dest_id to targets automatically
             if not targets and 'dest_id' in existing:
                 targets = [{"dest_id": existing['dest_id'], "dest_thread": existing.get('dest_thread'), "dest_title": existing.get('dest_title')}]
                 
@@ -263,7 +261,6 @@ class Database:
             {"$pull": {"targets": {"dest_id": int(dest_id)}}}
         )
         
-        # If targets array becomes empty, delete the whole watcher automatically
         doc = await self.db.watchers.find_one(query)
         if doc and not doc.get("targets"):
             await self.db.watchers.delete_one(query)
@@ -287,12 +284,11 @@ app = Client(
 )
 
 # ==============================================================================
-# --- NATIVE ASK IMPLEMENTATION (REPLACES PYROMOD) ---
+# --- NATIVE ASK IMPLEMENTATION ---
 # ==============================================================================
 ASK_FUTURES = {}
 
 async def custom_ask(self, chat_id: int, text: str, filters=None, timeout: int = 300, **kwargs):
-    """Native implementation of bot.ask() to bypass pyromod bugs."""
     msg = await self.send_message(chat_id, text, **kwargs)
     loop = asyncio.get_running_loop()
     future = loop.create_future()
@@ -303,7 +299,6 @@ async def custom_ask(self, chat_id: int, text: str, filters=None, timeout: int =
     except asyncio.TimeoutError:
         ASK_FUTURES.pop(chat_id, None)
         
-        # Simulate a /cancel message if the user times out
         class MockMessage:
             text = "/cancel"
             async def reply(self, reply_text, *args, **kw):
@@ -313,10 +308,8 @@ async def custom_ask(self, chat_id: int, text: str, filters=None, timeout: int =
         mock_msg._client = self
         return mock_msg
 
-# Bind the custom method to all Pyrogram Clients
 Client.ask = custom_ask
 
-# A specialized background listener to catch the user's reply
 @app.on_message(filters.private, group=-1)
 async def ask_listener(client, message):
     chat_id = message.chat.id
@@ -328,30 +321,27 @@ async def ask_listener(client, message):
             if asyncio.iscoroutine(is_match):
                 is_match = await is_match
             if not is_match:
-                return # Ignore this message, wait for a matching one
+                return 
                 
         ASK_FUTURES.pop(chat_id, None)
         if not future.done():
             future.set_result(message)
         message.stop_propagation()
+
 # ==============================================================================
 
 BOT_START_TIME = time.time()
 
-ACTIVE_PROCESSES = defaultdict(dict)  # user_id -> { task_uuid: info_dict, ... }
-CANCEL_FLAGS = {}  # task_uuid -> True when cancelled
+ACTIVE_PROCESSES = defaultdict(dict)  
+CANCEL_FLAGS = {}  
 
 batch_temp = type("BT", (), {})()
 batch_temp.ACTIVE_TASKS = defaultdict(int)
 
 # --- ROBUST CONCURRENCY SETTINGS ---
-# 1. Server Limit: Max 30 uploads total (Protects your server CPU/Bandwidth)
 SERVER_UPLOAD_LIMIT = asyncio.Semaphore(30) 
-
-# 2. User Limit: Max 3 uploads per user (Protects user from FloodWait)
 USER_SEMAPHORE_LIMIT = 3 
 USER_SEMAPHORES = defaultdict(lambda: asyncio.Semaphore(USER_SEMAPHORE_LIMIT))
-# -----------------------------------
 
 PENDING_TASKS = {}
 PROGRESS = {}
@@ -359,7 +349,7 @@ SESSION_STRING_SIZE = 351
 
 MAX_CONCURRENT_TASKS_PER_USER = int(os.environ.get("MAX_TASKS_PER_USER", "3"))
 
-USER_CLIENTS = {} # Dictionary: {user_id: Client_Object}
+USER_CLIENTS = {} 
 
 ALL_MSG_TYPES = ["Video", "Document", "Text", "Audio", "Photo", "Voice", "Animation", "Sticker"]
 
@@ -421,7 +411,7 @@ def sanitize_filename(filename: str) -> str:
         ext = ".dat"
     return f"{name}{ext}"
 
-# --- NEW SAFE AGGRESSIVE SMART RENAME LOGIC ---
+# --- SAFE AGGRESSIVE SMART RENAME LOGIC ---
 def smart_rename(filename, caption_text=""):
     filename_str = str(filename or "Unknown_File.mkv")
     caption_str = str(caption_text or "")
@@ -529,12 +519,8 @@ def smart_rename(filename, caption_text=""):
     return perfect_caption, perfect_filename
 
 async def check_link_restriction(user_id, link_text):
-    """
-    Analyzes the link to determine if the source content is restricted.
-    """
     clean_text = link_text.replace("https://", "").replace("http://", "").replace("t.me/", "").replace("c/", "")
     
-    # Do not split away "- all" during check! Only split if it's a number range
     if "-" in clean_text:
         clean_text = clean_text.split("-")[0].strip()
         
@@ -571,6 +557,7 @@ async def check_link_restriction(user_id, link_text):
         
         api_id = await db.get_api_id(user_id)
         api_hash = await db.get_api_hash(user_id)
+        # Session Memory Flag Enabled
         check_client = Client(f"check_{user_id}_{int(time.time())}", session_string=user_session, api_id=api_id, api_hash=api_hash, no_updates=True, ipv6=False, in_memory=True)
         is_temp_client = True
 
@@ -860,7 +847,7 @@ async def send_cancel(client: Client, message: Message):
 
     user_tasks = ACTIVE_PROCESSES.get(user_id, {})
     if not user_tasks:
-        await message.reply("✅ **No active tasks to cancel.**")
+        await message.reply("✅ **No active tasks to cancel.**\n\n*(Note: To remove a Watcher, please use the /watchers command and click Delete, or use /unwatch)*")
         return
 
     buttons = []
@@ -1778,7 +1765,8 @@ async def finalize_watcher_setup(client, message, data, delay, user_id=None):
                 api_id=u_api, 
                 api_hash=u_hash, 
                 workers=4, 
-                ipv6=False
+                ipv6=False,
+                in_memory=True # Memory Fix
             )
             new_client.add_handler(MessageHandler(user_watcher_handler))
             
@@ -1999,7 +1987,6 @@ async def process_links_logic(client: Client, message: Message, text: str, targe
             if len(parts) >= 3 and parts[1].isdigit(): 
                 filter_thread_id = int(parts[1])
 
-            # 1. Start User Client immediately to process Infinite Mode queries
             user_data = await db.get_session(user_id)
             if not user_data:
                 await message.reply("**/login First.**")
@@ -2021,16 +2008,14 @@ async def process_links_logic(client: Client, message: Message, text: str, targe
                     workers=4,
                     sleep_threshold=60,
                     ipv6=False,
-                    in_memory=True
+                    in_memory=True # Memory Fix
                 )
                 await acc.start()
                 is_temp_client = True
 
-            # 2. Determine Chat ID
             try: chatid_check = int("-100" + parts[0]) if "https://t.me/c/" in text else parts[0]
             except Exception: chatid_check = parts[0]
 
-            # 3. Parse Range and Handle "- ALL" logic
             last_segment = parts[-1].strip()
             range_match = re.search(r"(\d+)\s*-\s*([a-zA-Z0-9]+)", text)
             
@@ -2051,7 +2036,6 @@ async def process_links_logic(client: Client, message: Message, text: str, targe
             else:
                 fromID = toID = int(last_segment)
 
-            # 4. Media Group Auto-Expand
             if fromID == toID:
                 try:
                     media_group = await acc.get_media_group(chatid_check, fromID)
@@ -2062,7 +2046,6 @@ async def process_links_logic(client: Client, message: Message, text: str, targe
                 except Exception:
                     pass
 
-            # 5. Smart Resume Check
             primary_dest = targets[0]['dest_id'] if targets else "unknown_dest"
             saved_msg_id = await db.get_sync_progress(user_id, chatid_check, primary_dest)
 
@@ -2122,10 +2105,10 @@ async def process_links_logic(client: Client, message: Message, text: str, targe
 
                 is_success = False
                 try:
-                    chatid = int("-100" + parts[0]) if "https://t.me/c/" in text else parts[0]
+                    chat_id = int("-100" + parts[0]) if "https://t.me/c/" in text else parts[0]
                     
                     is_success = await handle_private(
-                        client, acc, message, chatid, msgid, index, total_count, 
+                        client, acc, message, chat_id, msgid, index, total_count, 
                         status_message, targets, delay, 
                         user_id, task_uuid, 
                         is_restricted=is_restricted, 
@@ -2162,6 +2145,9 @@ async def process_links_logic(client: Client, message: Message, text: str, targe
                     else:
                         await asyncio.sleep(0.05)
                         
+                if index % 100 == 0:
+                    gc.collect()
+
                 if not was_cancelled: await db.save_sync_progress(user_id, chatid_check, primary_dest, msgid)
 
                 if not is_restricted:
@@ -2442,7 +2428,6 @@ async def handle_private(client: Client, acc, message: Message, chatid, msgid: i
     finally:
         try: await asyncio.to_thread(shutil.rmtree, task_folder_path, ignore_errors=True)
         except: pass
-        gc.collect()
 
 try:
     from aiohttp import web
@@ -2511,6 +2496,8 @@ async def process_watcher_message(client, message):
 
         is_content_protected = getattr(message, "has_protected_content", False) or getattr(message.chat, "has_protected_content", False)
         
+        fallback_to_download = True 
+
         if not is_restricted and not is_content_protected:
             fallback_to_download = False
             safe_source_id = message.chat.username if message.chat.username else chat_id
@@ -2538,11 +2525,11 @@ async def process_watcher_message(client, message):
                         pass
 
                     try: 
-                        await client.copy_message(chat_id=dest_id, from_chat_id=chatid, message_id=message.id, reply_to_message_id=dest_thread, caption=clean_caption, parse_mode=enums.ParseMode.HTML)
+                        await client.copy_message(chat_id=dest_id, from_chat_id=chat_id, message_id=message.id, reply_to_message_id=dest_thread, caption=clean_caption, parse_mode=enums.ParseMode.HTML)
                         success = True
                     except Exception as e2:
                         try:
-                            await client.forward_messages(chat_id=dest_id, from_chat_id=chatid, message_ids=message.id, message_thread_id=dest_thread)
+                            await client.forward_messages(chat_id=dest_id, from_chat_id=chat_id, message_ids=message.id, message_thread_id=dest_thread)
                             success = True
                         except Exception as e3:
                             if LOG_CHANNEL:
@@ -2554,8 +2541,8 @@ async def process_watcher_message(client, message):
                 if not success:
                     fallback_to_download = True
 
-            if not fallback_to_download:
-                return 
+        if not fallback_to_download:
+            return 
                 
         owner_client = USER_CLIENTS.get(owner_id)
         if not owner_client: 
@@ -2695,13 +2682,12 @@ async def main():
                 api_hash=u_hash, 
                 workers=4, 
                 ipv6=False,
-                no_updates=False
+                in_memory=True
             )
             
+            user_client.add_handler(MessageHandler(user_watcher_handler))
             await user_client.start()
             USER_CLIENTS[user_id] = user_client
-            
-            user_client.add_handler(MessageHandler(user_watcher_handler))
             
             async for w in db.db.watchers.find({'user_id': user_id}):
                 target_source = w['source_id']
